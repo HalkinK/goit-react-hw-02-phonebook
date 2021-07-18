@@ -17,10 +17,25 @@ class App extends React.Component {
 
   onFormSubmit = ({ name, number }) => {
     const contact = { id: shortid.generate(), name, number };
+    const { contacts } = this.state;
 
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+    const existContactName = contacts.find(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    const existContactNumber = contacts.find(
+      (contact) => contact.number.toLowerCase() === number.toLowerCase()
+    );
+
+    const existContact =
+      (existContactName && `${name}`) || (existContactNumber && `${number}`);
+
+    console.log(existContact);
+
+    existContactName || existContactNumber
+      ? alert(`${existContact} is already in contacts`)
+      : this.setState(({ contacts }) => ({
+          contacts: [contact, ...contacts],
+        }));
   };
 
   onDeleteContact = (id) => {

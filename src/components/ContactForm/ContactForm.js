@@ -1,5 +1,7 @@
 import React from "react";
 import shortid from "shortid";
+import styles from "../ContactForm/ContactForm.module.css";
+import PropTypes from "prop-types";
 
 class ContactForm extends React.Component {
   state = {
@@ -29,10 +31,11 @@ class ContactForm extends React.Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <label htmlFor={this.nameInputId}>
           Name
           <input
+            className={styles.input}
             type="text"
             name="name"
             value={name}
@@ -47,6 +50,7 @@ class ContactForm extends React.Component {
         <label htmlFor={this.numberInputId}>
           Number
           <input
+            className={styles.input}
             type="tel"
             name="number"
             value={number}
@@ -58,10 +62,14 @@ class ContactForm extends React.Component {
           />
         </label>
         <br />
-        <button type="submit">Add contact</button>
+        <button className={styles.button} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
 }
+
+ContactForm.propTypes = { onSubmit: PropTypes.func };
 
 export default ContactForm;
