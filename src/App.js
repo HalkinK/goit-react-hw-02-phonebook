@@ -29,8 +29,6 @@ class App extends React.Component {
     const existContact =
       (existContactName && `${name}`) || (existContactNumber && `${number}`);
 
-    console.log(existContact);
-
     existContactName || existContactNumber
       ? alert(`${existContact} is already in contacts`)
       : this.setState(({ contacts }) => ({
